@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordenia PLUS - Tutor IA</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 90%; max-width: 450px; text-align: center; }
+        h1 { color: #1a73e8; margin-bottom: 20px; }
+        textarea { width: 100%; height: 110px; padding: 15px; border-radius: 12px; border: 2px solid #ddd; font-size: 16px; box-sizing: border-box; resize: none; margin-bottom: 20px; }
+        .btn-ia { background: #1a73e8; color: white; border: none; padding: 16px; border-radius: 50px; width: 100%; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-ia:hover { background: #1557b0; }
+        #res { margin-top: 25px; padding: 20px; background: #e8f0fe; border-radius: 15px; display: none; text-align: left; border-left: 5px solid #1a73e8; }
+        .btn-volver { display: inline-block; margin-top: 25px; color: #5f6368; text-decoration: none; font-size: 14px; border: 1px solid #dadce0; padding: 8px 20px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Ordenia PLUS</h1>
+        <textarea id="preg" placeholder="Escribe tu duda aquí..."></textarea>
+        <button onclick="preguntar()" id="btn" class="btn-ia">Preguntar a la IA</button>
+        <div id="res"><strong>Tutor:</strong> <p id="txt"></p></div>
+        <a href="ordenIA.html" class="btn-volver">← Volver a Ordenia</a>
+    </div>
+
+    <script>
+        async function preguntar() {
+            const btn = document.getElementById("btn");
+            const TOKEN = "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"; // Tu token
+            const pregunta = document.getElementById("preg").value;
+            
+            if(!pregunta.trim()) return alert("Escribe algo, Anderson.");
+
+            btn.innerText = "Saltando bloqueos...";
+            btn.disabled = true;
+
+            try {
+                // Quitamos cualquier configuración que Chrome pueda considerar "sospechosa"
+                const response = await fetch("https://api-inference.huggingface.co/models/Qwen/Qwen2.5-1.5B-Instruct", {
+                    method: "POST",
+                    headers: { 
+                        "Authorization": "Bearer " + TOKEN,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ inputs: pregunta })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    if (data.error.includes("loading")) {
+                        btn.innerText = "IA despertando (10s)...";
+                        setTimeout(preguntar, 5000);
+                    } else {
+                        throw new Error(data.error);
+                    }
+                } else {
+                    document.getElementById("res").style.display = "block";
+                    document.getElementById("txt").innerText = Array.isArray(data) ? data[0].generated_text : data.generated_text;
+                    btn.innerText = "Preguntar a la IA";
+                    btn.disabled = false;
+                }
+            } catch (e) {
+                console.error(e);
+                alert("Chrome sigue terco. Intenta esto: Haz clic derecho en el icono de la extensión -> 'Administrar extensiones' -> Activa 'Permitir acceso a URL de archivo'.");
+                btn.innerText = "Preguntar a la IA";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

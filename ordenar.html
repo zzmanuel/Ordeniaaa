@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/ordenia.css">
+    <title>Ordenar - Ordenia</title>
+</head>
+<body class="ordenar-body">
+
+    <nav class="nav-back">
+        <a href="ordenia.html" class="btn-back">← Volver al inicio</a>
+        <span class="board-title"> Tareas de Ordenia</span>
+    </nav>
+
+    <main class="kanban-container">
+        
+        <div class="kanban-column">
+            <div class="column-header">
+                <span class="dot purple"></span>
+                <span class="column-title">Tareas pendientes</span>
+                <span class="count" id="count-pendientes">3</span>
+            </div>
+            <div class="task-list" id="lista-pendientes">
+                
+                
+               
+            </div>
+            <button class="btn-add-task" onclick="agregarTarea('lista-pendientes')">+ Nueva página</button>
+        </div>
+
+        <div class="kanban-column">
+            <div class="column-header">
+                <span class="dot yellow"></span>
+                <span class="column-title">En curso</span>
+                <span class="count" id="count-en-curso">2</span>
+            </div>
+            <div class="task-list" id="lista-en-curso">
+     
+            </div>
+            <button class="btn-add-task" onclick="agregarTarea('lista-en-curso')">+ Nueva página</button>
+        </div>
+
+        <div class="kanban-column">
+            <div class="column-header">
+                <span class="dot blue"></span>
+                <span class="column-title">En revisión</span>
+                <span class="count" id="count-revision">2</span>
+            </div>
+            <div class="task-list" id="lista-revision">
+                
+            </div>
+            <button class="btn-add-task" onclick="agregarTarea('lista-revision')">+ Nueva página</button>
+        </div>
+
+        <div class="kanban-column">
+            <div class="column-header">
+                <span class="dot green"></span>
+                <span class="column-title">Finalizado</span>
+                <span class="count" id="count-finalizado">2</span>
+            </div>
+            <div class="task-list" id="lista-finalizado">
+                
+                
+            </div>
+            <button class="btn-add-task" onclick="agregarTarea('lista-finalizado')">+ Nueva página</button>
+        </div>
+
+    </main>
+
+    <script>
+    // 1. Al cargar la página, recuperamos lo guardado
+    document.addEventListener("DOMContentLoaded", () => {
+        cargarTareas();
+    });
+
+    function agregarTarea(idColumna) {
+        const nombreTarea = prompt("¿Qué tarea quieres agregar a Ordenia?");
+
+        if (nombreTarea !== null && nombreTarea.trim() !== "") {
+            crearElementoTarea(idColumna, nombreTarea);
+            guardarEstado(); // Guardamos el cambio
+        }
+    }
+
+    // Función separada para crear el cuadrito de tarea
+    function crearElementoTarea(idColumna, texto) {
+        const lista = document.getElementById(idColumna);
+        const nuevaTarea = document.createElement("div");
+        nuevaTarea.className = "task-card";
+        nuevaTarea.innerHTML = `
+            ${texto}
+            <span class="delete-btn" onclick="eliminarTarea(this)">×</span>
+        `;
+        lista.appendChild(nuevaTarea);
+        actualizarContador(idColumna);
+    }
+
+    function eliminarTarea(elemento) {
+        if (confirm("¿Estás seguro de eliminar esta tarea?")) {
+            const tarea = elemento.parentElement;
+            const idColumna = tarea.parentElement.id;
+            tarea.remove();
+            actualizarContador(idColumna);
+            guardarEstado(); // Guardamos el cambio tras borrar
+        }
+    }
+
+    function actualizarContador(idColumna) {
+        const lista = document.getElementById(idColumna);
+        const columna = lista.parentElement;
+        const contador = columna.querySelector('.count');
+        contador.innerText = lista.children.length;
+    }
+
+    // --- FUNCIONES DE MEMORIA (LocalStorage) ---
+
+    function guardarEstado() {
+        const columnas = ["lista-pendientes", "lista-en-curso", "lista-revision", "lista-finalizado"];
+        const datosParaGuardar = {};
+
+        columnas.forEach(id => {
+            const lista = document.getElementById(id);
+            const tareas = Array.from(lista.querySelectorAll('.task-card')).map(t => t.innerText.replace('×', '').trim());
+            datosParaGuardar[id] = tareas;
+        });
+
+        // Guardamos todo el objeto convertido a texto en la memoria del navegador
+        localStorage.setItem("tareasOrdenia", JSON.stringify(datosParaGuardar));
+    }
+
+    function cargarTareas() {
+        const datosGuardados = localStorage.getItem("tareasOrdenia");
+        if (datosGuardados) {
+            const datos = JSON.parse(datosGuardados);
+            Object.keys(datos).forEach(idColumna => {
+                datos[idColumna].forEach(textoTarea => {
+                    crearElementoTarea(idColumna, textoTarea);
+                });
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

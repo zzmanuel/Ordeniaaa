@@ -1,0 +1,435 @@
+/* Configuración General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Coursera usa una fuente similar a Source Sans Pro */
+}
+
+.hero-section {
+    background-color: #0056D2; /* Azul corporativo */
+    color: white;
+    padding: 60px 20px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Estilo del Logo y Texto */
+.logo-plus {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.brand {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.plus-badge {
+    background-color: white;
+    color: #0056D2;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px 6px;
+    margin-left: 5px;
+    border-radius: 2px;
+}
+
+h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    max-width: 600px;
+}
+
+.description {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.promo-text {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+/* Botón */
+.btn-save {
+    display: inline-block;
+    background-color: white;
+    color: #0056D2;
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-save:hover {
+    background-color: #f0f0f0;
+}
+
+/* Parte derecha (Imagen y etiqueta de precio) */
+.hero-image {
+    position: relative;
+    text-align: center;
+    margin-right: 30px;
+    margin-left: 50px;
+}
+
+.price-tag {
+    background-color: #00419e; /* Un azul más oscuro */
+    padding: 20px;
+    border-radius: 8px;
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.price-tag .strike {
+    text-decoration: line-through;
+    font-size: 14px;
+    display: block;
+}
+
+.price-tag h2 {
+    font-size: 32px;
+}
+
+.price-tag h2 span {
+    font-size: 16px;
+}
+
+/* Responsividad básica */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    h1 {
+        font-size: 32px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f6f7fb;
+    padding: 50px 0;
+}
+
+/* Estilos del Encabezado */
+.header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 50px auto;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #1a1d28;
+}
+
+.header p {
+    color: #45474e;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-primary {
+    background-color: #4255ff;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-link {
+    color: #4255ff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Contenedor de Tarjetas */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+.imagen1{
+    height: 200px;
+    width: 270px;
+}
+.imagen2{
+    height: 170px;
+    width: 170px;
+}
+.imagen3{
+    height: 170px;
+    width: 170px;
+}
+.imagen4{
+    height: 170px;
+    width: 170px;
+}
+/* Estilo Base de Tarjeta */
+.card {
+    width: 260px;
+    height: 380px;
+    border-radius: 20px;
+    padding: 25px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #1a1d28;
+}
+
+.card-content {
+    background: white;
+    width: 85%;
+    height: 100%;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+/* Colores específicos */
+.card-blue { background-color: #a8e6ff; }
+.card-purple { background-color: #4255ff; }
+.card-purple h3 { color: white; }
+.card-yellow { background-color: #ffcd1f; }
+.card-peach { background-color: #ffd1c1; }
+
+/* Mini componentes internos (decorativos) */
+.mini-flashcard {
+    border: 2px solid #edeff2;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.progress-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 8px solid #edeff2;
+    border-top-color: #23b26d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.card {
+    text-decoration: none; /* Quita el subrayado */
+    color: inherit;        /* Mantiene el color del texto original */
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Efecto de levante */
+}
+
+
+
+.premium-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4757;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Estilos para la página de Ordenar */
+.ordenar-body {
+    background-color: #ffffff; /* Fondo blanco como en la imagen */
+    padding: 0;
+}
+
+.nav-back {
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: #4255ff;
+    font-weight: bold;
+}
+
+.board-title {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Contenedor del Tablero Kanban */
+.kanban-container {
+    display: flex;
+    gap: 15px;
+    padding: 30px 40px;
+    align-items: flex-start;
+    overflow-x: auto; /* Para que se pueda deslizar en móvil */
+}
+
+.kanban-column {
+    background-color: #f9f9fb; /* Gris muy clarito */
+    width: 280px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.column-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+}
+
+.column-title {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.count {
+    color: #aaa;
+    font-size: 13px;
+}
+
+/* Puntos de colores */
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.purple { background-color: #d8b4fe; }
+.yellow { background-color: #fde047; }
+.blue { background-color: #60a5fa; }
+.green { background-color: #4ade80; }
+
+/* Tarjetas de Tareas */
+.task-card {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-size: 14px;
+    color: #333;
+    cursor: grab;
+}
+
+.task-card:hover {
+    background-color: #f0f0f0;
+}
+
+/* Botón de añadir */
+.btn-add-task {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-add-task:hover {
+    background: #eee;
+    border-radius: 5px;
+    color: #666;
+}
+.task-card {
+    position: relative;
+    padding-right: 35px; /* Deja espacio para la X */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+}
+
+.delete-btn {
+    cursor: pointer;
+    color: #ccc;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 5px;
+    transition: color 0.2s;
+}
+
+.delete-btn:hover {
+    color: #ff4757;
+}
+
+.btn-add-task {
+    margin-top: 10px;
+    transition: all 0.2s;
+}
+
+.btn-add-task:hover {
+    color: #4255ff;
+    background-color: #f0f2ff;
+}
+
